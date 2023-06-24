@@ -14,6 +14,7 @@ public class EnterFragment extends Fragment{
 
     FragmentEnterBinding binding;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -21,5 +22,6 @@ public class EnterFragment extends Fragment{
 
         return binding.getRoot();
     }
+
 
 }
