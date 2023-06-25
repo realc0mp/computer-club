@@ -25,6 +25,7 @@ public class BaseViewModel extends AndroidViewModel {
             this.getApplication(),
             DataBase.class,
             "database")
+            .fallbackToDestructiveMigration()
             .build();
 
     protected Repo repository = new Repo(db.getDao());

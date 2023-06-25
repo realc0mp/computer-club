@@ -1,8 +1,10 @@
 package com.example.computer_club.db;
 
+import com.example.computer_club.History;
 import com.example.computer_club.User;
 
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -63,5 +65,18 @@ public class Repo {
                 }
                 return insertUser(user);
             });
+    }
+
+
+    public Single<User> getUserByEmail(String email){
+        return dao.getUserByEmail(email)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<List<History>> getAllHistory(){
+        return dao.getAllHistory()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

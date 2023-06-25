@@ -30,7 +30,7 @@ public class EnterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        sp = requireActivity().getPreferences(MODE_PRIVATE);
+        sp = getContext().getSharedPreferences("APP_PREFS", MODE_PRIVATE);
 
         if(!sp.getAll().isEmpty()){
             enter();

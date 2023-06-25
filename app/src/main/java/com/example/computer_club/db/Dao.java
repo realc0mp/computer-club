@@ -3,7 +3,10 @@ package com.example.computer_club.db;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.computer_club.History;
 import com.example.computer_club.User;
+
+import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
@@ -20,4 +23,9 @@ public interface Dao {
     @Insert
     Completable insertUser(User user);
 
+    @Query("select * from user where email = :email")
+    Single<User> getUserByEmail(String email);
+
+    @Query("select * from history")
+    Single<List<History>> getAllHistory();
 }

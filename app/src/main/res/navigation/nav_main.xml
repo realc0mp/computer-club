@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.computer_club.fragments.ProfileFragment"
+        android:name="com.example.computer_club.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
