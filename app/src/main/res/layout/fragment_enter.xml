@@ -8,16 +8,21 @@
     tools:context=".fragments.EnterFragment">
 
     <EditText
+        android:id="@+id/email"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:hint="Почта"/>
+        android:hint="Почта"
+        android:inputType="textEmailAddress"/>
 
     <EditText
+        android:id="@+id/password"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:hint="Пароль"/>
+        android:hint="Пароль"
+        android:inputType="textPassword"/>
 
     <Button
+        android:id="@+id/enter_btn"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:text="Войти"/>

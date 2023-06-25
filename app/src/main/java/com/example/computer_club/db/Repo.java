@@ -1,13 +1,17 @@
 package com.example.computer_club.db;
 
-import android.database.Observable;
-
 import com.example.computer_club.User;
 
+import java.util.HashMap;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.BiConsumer;
+import io.reactivex.rxjava3.functions.BiFunction;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class Repo {
@@ -18,21 +22,46 @@ public class Repo {
         this.dao = dao;
     }
 
-    public Completable insertUser(User user){
+    private Completable insertUser(User user){
         return dao.insertUser(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<Boolean> checkIfUserLogged(String email){
+    private Single<Boolean> checkIfEmailLogged(String email){
         return dao.checkIfUserLogged(email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<Boolean> checkPassword(String email, String password){
+    private Single<Boolean> checkPassword(String email, String password){
         return dao.checkPassword(email, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public @NonNull Single<HashMap<String, Boolean>> enter(String email, String password){
+        Single<Boolean> checkIfLogged = checkIfEmailLogged(email);
+        Single<Boolean> checkPassword = checkPassword(email, password);
+
+        BiFunction<Boolean, Boolean, HashMap<String, Boolean>> biFunc = (emailCheck, passCheck) -> {
+            HashMap<String, Boolean> map = new HashMap<>();
+            map.put("EMAIL_CHECK", emailCheck);
+            map.put("PASS_CHECK", passCheck);
+            return map;
+        };
+
+        return Single.zip(checkIfLogged, checkPassword, biFunc);
+    }
+
+
+    public Completable register(User user){
+        return checkIfEmailLogged(user.email)
+            .flatMapCompletable(emailExist -> {
+                if (emailExist) {
+                    throw new IllegalStateException("Почта уже зарегестрирована!");
+                }
+                return insertUser(user);
+            });
     }
 }

@@ -17,4 +17,12 @@ public class User {
     public String email = "";
     @ColumnInfo(name = "password")
     public String password = "";
+
+
+    public User(String name, String date, String email, String password){
+        this.name = name;
+        this.date = date;
+        this.email = email;
+        this.password = password;
+    }
 }

@@ -9,6 +9,7 @@
 
 
     <EditText
+        android:id="@+id/name"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="Имя"/>
@@ -25,6 +26,7 @@
             android:text="Дата рождения"/>
 
         <Button
+            android:id="@+id/date_pick_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
@@ -32,24 +34,28 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/email"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="Почта"/>
 
     <EditText
+        android:id="@+id/password"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="Пароль"/>
 
 
     <EditText
+        android:id="@+id/repeat_password"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="Повторите пароль"/>
 
     <Button
+        android:id="@+id/register_btn"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="Войти"/>
+        android:text="Регистрация"/>
 
 </LinearLayout>

@@ -12,7 +12,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class AuthActivity extends AppCompatActivity {
 
-    private SharedPreferences sp;
     private ActivityAuthBinding binding;
 
     @Override
@@ -20,9 +19,6 @@ public class AuthActivity extends AppCompatActivity {
         binding = ActivityAuthBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-
-        sp = getPreferences(MODE_PRIVATE);
-        goOrStay();
 
         prepareAdapter();
     }
@@ -46,11 +42,4 @@ public class AuthActivity extends AppCompatActivity {
         }).attach();
     }
 
-    private void goOrStay(){
-        if(!sp.getBoolean("USER_LOGGED_IN", false)){
-            return;
-        }
-
-        startActivity(new Intent(this, MainActivity.class), new Bundle());
-    }
 }
