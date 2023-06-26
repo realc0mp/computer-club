@@ -1,4 +1,4 @@
-package com.example.computer_club.viewmodels;
+package com.example.computer_club.auth;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -6,16 +6,10 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.computer_club.db.Repo;
+import com.example.computer_club.BaseViewModel;
 
 import java.util.HashMap;
-
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.functions.BiConsumer;
-import io.reactivex.rxjava3.functions.BiFunction;
-import io.reactivex.rxjava3.functions.Consumer;
 
 public class EnterViewModel extends BaseViewModel {
 

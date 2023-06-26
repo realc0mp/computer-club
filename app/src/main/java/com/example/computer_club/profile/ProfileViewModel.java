@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.computer_club.History;
-import com.example.computer_club.User;
-import com.example.computer_club.viewmodels.BaseViewModel;
+import com.example.computer_club.tables.History;
+import com.example.computer_club.tables.User;
+import com.example.computer_club.BaseViewModel;
 
 import java.util.List;
 

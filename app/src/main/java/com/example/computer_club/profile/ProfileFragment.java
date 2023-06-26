@@ -3,6 +3,7 @@ package com.example.computer_club.profile;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.computer_club.EmptyListNotificator;
 import com.example.computer_club.R;
+import com.example.computer_club.activities.AuthActivity;
 import com.example.computer_club.databinding.FragmentProfileBinding;
 import com.example.computer_club.profile.ProfileViewModel;
 
@@ -42,6 +44,11 @@ public class ProfileFragment extends Fragment{
         viewModel.getUserByEmail(sp.getString("EMAIL", " "));
         viewModel.getAllHistory();
 
+
+        binding.quiteBtn.setOnClickListener(v -> {
+            sp.edit().clear().apply();
+            startActivity(new Intent(requireContext(), AuthActivity.class));
+        });
 
         return binding.getRoot();
     }

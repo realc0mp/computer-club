@@ -1,4 +1,4 @@
-package com.example.computer_club.fragments;
+package com.example.computer_club.auth;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.computer_club.activities.MainActivity;
 import com.example.computer_club.databinding.FragmentEnterBinding;
-import com.example.computer_club.viewmodels.EnterViewModel;
 
 
 public class EnterFragment extends Fragment {

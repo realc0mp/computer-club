@@ -1,16 +1,9 @@
-package com.example.computer_club;
-
-import android.view.View;
-import android.view.ViewGroup;
+package com.example.computer_club.auth;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-
-import com.example.computer_club.fragments.EnterFragment;
-import com.example.computer_club.fragments.RegistrationFragment;
 
 public class AuthPagerAdapter extends FragmentStateAdapter {
 

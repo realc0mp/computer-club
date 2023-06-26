@@ -2,11 +2,9 @@ package com.example.computer_club.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.example.computer_club.AuthPagerAdapter;
+import com.example.computer_club.auth.AuthPagerAdapter;
 import com.example.computer_club.databinding.ActivityAuthBinding;
 import com.google.android.material.tabs.TabLayoutMediator;
 

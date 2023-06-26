@@ -1,13 +1,14 @@
-package com.example.computer_club.viewmodels;
+package com.example.computer_club.auth;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import com.example.computer_club.User;
+import com.example.computer_club.tables.User;
+import com.example.computer_club.BaseViewModel;
 
 
-public class RegisterViewModel extends BaseViewModel{
+public class RegisterViewModel extends BaseViewModel {
 
     public RegisterViewModel(@NonNull Application application) {
         super(application);

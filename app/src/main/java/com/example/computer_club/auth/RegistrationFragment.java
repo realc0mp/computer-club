@@ -1,4 +1,4 @@
-package com.example.computer_club.fragments;
+package com.example.computer_club.auth;
 
 import static com.example.computer_club.EmailValidator.isEmailValid;
 
@@ -15,11 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.computer_club.EmailValidator;
-import com.example.computer_club.User;
-import com.example.computer_club.databinding.FragmentAuthorBinding;
 import com.example.computer_club.databinding.FragmentRegistrationBinding;
-import com.example.computer_club.viewmodels.RegisterViewModel;
+import com.example.computer_club.tables.User;
 
 public class RegistrationFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
@@ -68,13 +65,9 @@ public class RegistrationFragment extends Fragment implements DatePickerDialog.O
         }
 
 
-        viewModel.register(new User(
-                        name,
-                        date,
-                        email,
-                        password
-                )
-        );
+        viewModel.register(new User(name, date, email, password));
+
+        toast("Успешно зарегестрирован!");
     }
 
     private void toast(String text) {

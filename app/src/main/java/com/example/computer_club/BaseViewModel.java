@@ -1,4 +1,4 @@
-package com.example.computer_club.viewmodels;
+package com.example.computer_club;
 
 import android.app.Application;
 

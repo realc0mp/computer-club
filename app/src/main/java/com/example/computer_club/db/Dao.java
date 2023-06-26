@@ -3,8 +3,8 @@ package com.example.computer_club.db;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.computer_club.History;
-import com.example.computer_club.User;
+import com.example.computer_club.tables.History;
+import com.example.computer_club.tables.User;
 
 import java.util.List;
 

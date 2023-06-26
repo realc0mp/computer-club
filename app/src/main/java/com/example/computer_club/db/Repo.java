@@ -1,7 +1,7 @@
 package com.example.computer_club.db;
 
-import com.example.computer_club.History;
-import com.example.computer_club.User;
+import com.example.computer_club.tables.History;
+import com.example.computer_club.tables.User;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,10 +10,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.BiConsumer;
 import io.reactivex.rxjava3.functions.BiFunction;
-import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class Repo {
