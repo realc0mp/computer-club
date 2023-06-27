@@ -6,13 +6,16 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +25,7 @@ import com.example.computer_club.R;
 import com.example.computer_club.activities.AuthActivity;
 import com.example.computer_club.databinding.FragmentProfileBinding;
 import com.example.computer_club.profile.ProfileViewModel;
+import com.example.computer_club.tables.User;
 
 public class ProfileFragment extends Fragment{
 
@@ -29,6 +33,7 @@ public class ProfileFragment extends Fragment{
     FragmentProfileBinding binding;
     SharedPreferences sp;
     HistoryAdapter adapter;
+    User user;
     public ProfileFragment(){}
 
     @Nullable
@@ -39,11 +44,10 @@ public class ProfileFragment extends Fragment{
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
         adapter = new HistoryAdapter();
+
         prepareObservers();
 
         viewModel.getUserByEmail(sp.getString("EMAIL", " "));
-        viewModel.getAllHistory();
-
 
         binding.quiteBtn.setOnClickListener(v -> {
             sp.edit().clear().apply();
@@ -56,9 +60,11 @@ public class ProfileFragment extends Fragment{
 
     private void prepareObservers(){
         viewModel.userData.observe(getViewLifecycleOwner(), user -> {
+            this.user = user;
             binding.name.setText(user.name);
             binding.email.setText(user.email);
             binding.date.setText(user.date);
+            viewModel.getAllHistory(user.id);
         });
 
         viewModel.historyData.observe(getViewLifecycleOwner(), histories -> {
@@ -79,6 +85,12 @@ public class ProfileFragment extends Fragment{
                 ));
             }
         });
+
+        viewModel.error.observe(getViewLifecycleOwner(), this::toast);
     }
 
+
+    private void toast(String text) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show();
+    }
 }

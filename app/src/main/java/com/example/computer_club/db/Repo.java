@@ -1,6 +1,8 @@
 package com.example.computer_club.db;
 
-import com.example.computer_club.tables.History;
+import com.example.computer_club.DateTime;
+import com.example.computer_club.tables.Comp;
+import com.example.computer_club.tables.Order;
 import com.example.computer_club.tables.User;
 
 import java.util.HashMap;
@@ -71,9 +73,40 @@ public class Repo {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<List<History>> getAllHistory(){
-        return dao.getAllHistory()
+    public Single<List<Order>> getAllHistory(int userId){
+        return dao.getAllUserOrders(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Completable addCompsList(List<Comp> comps){
+        return dao.insertCompList(comps)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<List<Comp>> getAllComps(){
+        return dao.getAllComps()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Completable deleteComp(int id){
+        return dao.deleteComp(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Completable insertOrder(Order order){
+        return dao.insertOrder(order)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<List<DateTime>> getCompOrderedTime(int compId){
+        return dao.getCompOrderedDateTime(compId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 }

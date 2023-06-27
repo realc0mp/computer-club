@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.computer_club.fragments.MainFragment"
+        android:name="com.example.computer_club.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
 

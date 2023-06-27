@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.computer_club.db.Dao;
 import com.example.computer_club.db.DataBase;
@@ -26,6 +27,14 @@ public class BaseViewModel extends AndroidViewModel {
             DataBase.class,
             "database")
             .fallbackToDestructiveMigration()
+            .addCallback(new RoomDatabase.Callback() {
+                @Override
+                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                    super.onCreate(db);
+                    db.execSQL("insert into user (name, date, email, password, isAdmin) " +
+                            "values (\"admin\", \"00.00.0000\", \"admin@admin.com\", \"admin\", true)");
+                }
+            })
             .build();
 
     protected Repo repository = new Repo(db.getDao());

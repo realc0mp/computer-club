@@ -1,9 +1,12 @@
 package com.example.computer_club.db;
 
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.computer_club.tables.History;
+import com.example.computer_club.DateTime;
+import com.example.computer_club.tables.Comp;
+import com.example.computer_club.tables.Order;
 import com.example.computer_club.tables.User;
 
 import java.util.List;
@@ -26,6 +29,24 @@ public interface Dao {
     @Query("select * from user where email = :email")
     Single<User> getUserByEmail(String email);
 
-    @Query("select * from history")
-    Single<List<History>> getAllHistory();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable insertCompList(List<Comp> comps);
+
+    @Query("select * from comp")
+    Single<List<Comp>> getAllComps();
+
+    @Query("delete from comp where id = :id")
+    Completable deleteComp(int id);
+
+
+    @Query("select * from `order` where userId = :userId")
+    Single<List<Order>> getAllUserOrders(int userId);
+
+    @Insert
+    Completable insertOrder(Order order);
+
+    @Query("select date, time from `order` where compId = :compId")
+    Single<List<DateTime>> getCompOrderedDateTime(int compId);
+
 }

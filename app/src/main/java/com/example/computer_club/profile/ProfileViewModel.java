@@ -7,7 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.computer_club.tables.History;
+import com.example.computer_club.SingleLiveEvent;
+import com.example.computer_club.tables.Order;
 import com.example.computer_club.tables.User;
 import com.example.computer_club.BaseViewModel;
 
@@ -15,11 +16,12 @@ import java.util.List;
 
 public class ProfileViewModel extends BaseViewModel {
 
-    private MutableLiveData<User> _userData = new MutableLiveData<>();
+    private SingleLiveEvent<User> _userData = new SingleLiveEvent<>();
     public LiveData<User> userData = _userData;
 
-    private MutableLiveData<List<History>> _historyData = new MutableLiveData<>();
-    public LiveData<List<History>> historyData = _historyData;
+    private SingleLiveEvent<List<Order>> _historyData = new SingleLiveEvent<>();
+    public LiveData<List<Order>> historyData = _historyData;
+
 
     public ProfileViewModel(@NonNull Application application) {
         super(application);
@@ -28,12 +30,13 @@ public class ProfileViewModel extends BaseViewModel {
     @SuppressLint("CheckResult")
     public void getUserByEmail(String email){
         repository.getUserByEmail(email)
-                .subscribe(user -> _userData.postValue(user));
+                .subscribe(user -> _userData.postValue(user), err -> _error.postValue(err.getMessage()));
     }
 
     @SuppressLint("CheckResult")
-    public void getAllHistory(){
-        repository.getAllHistory()
+    public void getAllHistory(int userId){
+        repository.getAllHistory(userId)
                 .subscribe(list -> _historyData.postValue(list));
     }
+
 }
