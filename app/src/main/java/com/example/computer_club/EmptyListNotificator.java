@@ -1,5 +1,6 @@
 package com.example.computer_club;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

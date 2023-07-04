@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
 import androidx.annotation.NonNull;
@@ -50,6 +52,8 @@ public class CompsAdapter extends RecyclerView.Adapter<CompsAdapter.ViewHolder> 
         holder.binding.getRoot().setOnClickListener(v -> {
             binder.bindDialog(item);
         });
+
+        setAnimation(holder.itemView, holder.context);
     }
 
     @Override
@@ -66,8 +70,9 @@ public class CompsAdapter extends RecyclerView.Adapter<CompsAdapter.ViewHolder> 
 
 
     public void removeItem(Comp item){
+        int pos = items.indexOf(item);
         this.items.remove(item);
-        notifyDataSetChanged();
+        notifyItemRemoved(pos);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -80,5 +85,10 @@ public class CompsAdapter extends RecyclerView.Adapter<CompsAdapter.ViewHolder> 
 
         ItemCompBinding binding;
         Context context;
+    }
+
+    private void setAnimation(View view,  Context context){
+        Animation anim = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        view.startAnimation(anim);
     }
 }

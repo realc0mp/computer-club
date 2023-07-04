@@ -1,5 +1,7 @@
 package com.example.computer_club.main;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.computer_club.DateProvider;
+import com.example.computer_club.R;
 import com.example.computer_club.databinding.DialogCompBinding;
 import com.example.computer_club.tables.Comp;
 import com.example.computer_club.tables.Order;
@@ -35,7 +38,7 @@ public class CompDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         binding = DialogCompBinding.inflate(getLayoutInflater());
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext(), R.style.MyCustomTheme);
         viewModel = new ViewModelProvider(this).get(DialogViewModel.class);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
@@ -80,8 +83,13 @@ public class CompDialog extends DialogFragment {
 
             spinAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, timeArr);
             binding.timeSpinner.setAdapter(spinAdapter);
+
+            if(timeArr.size() == 0){
+                binding.addOrderBtn.setEnabled(false);
+            }
         });
 
         return binding.getRoot();
     }
+
 }

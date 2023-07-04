@@ -18,7 +18,8 @@
         <ImageView
             android:id="@+id/comp_image"
             android:layout_width="match_parent"
-            android:layout_height="232dp"/>
+            android:layout_height="232dp"
+            android:transitionName="comp_image"/>
 
         <ImageButton
             android:id="@+id/dismiss_dialog_btn"
@@ -28,15 +29,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"/>
-
-
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="56dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_cross"/>
 
     </RelativeLayout>
 

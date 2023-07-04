@@ -3,6 +3,9 @@ package com.example.computer_club.main;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.animation.LayoutTransition;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -35,7 +40,6 @@ public class MainFragment extends Fragment{
 
     DialogBinder dialogBinder;
     DialogBinder delBinder;
-
     User user;
     public MainFragment(){}
 
@@ -94,7 +98,7 @@ public class MainFragment extends Fragment{
             binding.container.removeAllViews();
             binding.container.addView(EmptyListNotificator.createEmptyListView(
                     binding.container,
-                    R.drawable.ic_history,
+                    R.drawable.ic_comp,
                     R.string.history_empty
             ));
         } else{
@@ -104,6 +108,7 @@ public class MainFragment extends Fragment{
                     adapter,
                     new LinearLayoutManager(requireContext())
             ));
+            binding.container.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         }
     }
 
