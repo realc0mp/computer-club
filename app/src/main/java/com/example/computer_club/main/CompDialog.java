@@ -41,27 +41,26 @@ public class CompDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext(), R.style.MyCustomTheme);
         viewModel = new ViewModelProvider(this).get(DialogViewModel.class);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            assert getArguments() != null;
-            Comp comp = getArguments().getSerializable("COMP", Comp.class);
-            int userId = getArguments().getInt("USER_ID");
+        assert getArguments() != null;
+        Comp comp = (Comp) getArguments().getSerializable("COMP");
+        int userId = getArguments().getInt("USER_ID");
 
-            viewModel.getCompOrderedTime(comp.id);
+        viewModel.getCompOrderedTime(comp.id);
 
-            binding.compName.setText(comp.name);
-            binding.compDesc.setText(comp.characteristics);
-            binding.compImage.setImageDrawable(AppCompatResources.getDrawable(requireContext(), comp.image));
-            binding.dismissDialogBtn.setOnClickListener(v -> dismiss());
+        binding.compName.setText(comp.name);
+        binding.compDesc.setText(comp.characteristics);
+        binding.compImage.setImageDrawable(AppCompatResources.getDrawable(requireContext(), comp.image));
+        binding.dismissDialogBtn.setOnClickListener(v -> dismiss());
 
-            binding.timeSpinner.setOnItemSelectedListener((SimpleOnItemSelected) (parent, view, position, id) -> {
-                choseTime = timeArr.get(position);
-            });
+        binding.timeSpinner.setOnItemSelectedListener((SimpleOnItemSelected) (parent, view, position, id) -> {
+            choseTime = timeArr.get(position);
+        });
 
-            binding.addOrderBtn.setOnClickListener(v -> {
-                viewModel.addOrder(new Order(choseTime, comp.name, comp.id, userId));
-                dismiss();
-            });
-        }
+        binding.addOrderBtn.setOnClickListener(v -> {
+            viewModel.addOrder(new Order(choseTime, comp.name, comp.id, userId));
+            dismiss();
+        });
+
 
 
         builder.setView(binding.getRoot());

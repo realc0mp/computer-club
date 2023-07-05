@@ -32,7 +32,7 @@ public class BaseViewModel extends AndroidViewModel {
                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                     super.onCreate(db);
                     db.execSQL("insert into user (name, date, email, password, isAdmin) " +
-                            "values (\"admin\", \"00.00.0000\", \"admin@admin.com\", \"admin\", true)");
+                            "values (\"admin\", \"00.00.0000\", \"admin@admin.com\", \"admin\", 1)");
                 }
             })
             .build();
