@@ -91,10 +91,26 @@ public class Repo {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Completable deleteComp(int id){
+    private Completable deleteComp(int id){
         return dao.deleteComp(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private Single<Boolean> isComputerOrdered(int compId){
+        return dao.isComputerOrdered(compId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Completable deleteCompIfNotOrdered(int compId){
+        return isComputerOrdered(compId)
+                .flatMapCompletable(ordered -> {
+                    if(ordered){
+                        throw new IllegalStateException("Компьютер забронирован!");
+                    }
+                    return deleteComp(compId);
+                });
     }
 
     public Completable insertOrder(Order order){

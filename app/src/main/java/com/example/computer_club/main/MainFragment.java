@@ -87,8 +87,7 @@ public class MainFragment extends Fragment{
         };
 
         delBinder = (item) -> {
-            viewModel.deleteComp(item.id);
-            adapter.removeItem(item);
+            viewModel.deleteComp(item);
         };
     }
 
@@ -108,7 +107,6 @@ public class MainFragment extends Fragment{
                     adapter,
                     new LinearLayoutManager(requireContext())
             ));
-            binding.container.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         }
     }
 
@@ -129,7 +127,12 @@ public class MainFragment extends Fragment{
             setContainerView(comps);
         });
 
-        viewModel.deletedData.observe(getViewLifecycleOwner(), o -> adapter.setBinder(dialogBinder));
+        viewModel.deletedData.observe(getViewLifecycleOwner(), item -> {
+            adapter.setBinder(dialogBinder);
+            adapter.removeItem(item);
+        });
+
+        viewModel.error.observe(getViewLifecycleOwner(), (er) -> Toast.makeText(requireContext(), er, Toast.LENGTH_LONG).show());
     }
 
 

@@ -26,8 +26,8 @@ public class MainViewModel extends BaseViewModel {
     private MutableLiveData<User> _userData = new MutableLiveData<>();
     public LiveData<User> userData = _userData;
 
-    private MutableLiveData<Object> _deletedData = new MutableLiveData();
-    public LiveData<Object> deletedData = _deletedData;
+    private MutableLiveData<Comp> _deletedData = new MutableLiveData();
+    public LiveData<Comp> deletedData = _deletedData;
 
     @SuppressLint("CheckResult")
     public void getAllComps(){
@@ -47,8 +47,8 @@ public class MainViewModel extends BaseViewModel {
     }
 
     @SuppressLint("CheckResult")
-    public void deleteComp(int id){
-        repository.deleteComp(id)
-                .subscribe(() -> _deletedData.postValue(new Object()));
+    public void deleteComp(Comp item){
+        repository.deleteCompIfNotOrdered(item.id)
+                .subscribe(() -> _deletedData.postValue(item), er -> _error.postValue(er.getMessage()));
     }
 }

@@ -39,6 +39,9 @@ public interface Dao {
     @Query("delete from comp where id = :id")
     Completable deleteComp(int id);
 
+    @Query("select exists(select * from `Order` where compId = :compId)")
+    Single<Boolean> isComputerOrdered(int compId);
+
 
     @Query("select * from `order` where userId = :userId")
     Single<List<Order>> getAllUserOrders(int userId);
